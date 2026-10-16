@@ -32,3 +32,4 @@ sed -i 's/15744k/32448k/g' target/linux/ramips/image/mt7621.mk
 # echo "CONFIG_PACKAGE_vsftpd-alt=y" >> .config
 
 rm -rf feeds/smpackage/*vsftpd*
+rm -rf feeds/smpackage/luci-app-koolproxyR/files/usr/share/koolproxy/data/rules/{easylistchina.txt,fanboy.txt,yhosts.txt}
