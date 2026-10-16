@@ -22,11 +22,13 @@ sed -i 's/15744k/32448k/g' target/linux/ramips/image/mt7621.mk
 #sed -i 's/KERNEL_PATCHVER:=5.10/KERNEL_PATCHVER:=5.4/g' target/linux/ramips/Makefile
 
 # 1. 将所有 luci-app-vsftpd 中的 +vsftpd 依赖强制替换为 +vsftpd-alt（防止 make defconfig 自动勾回 vsftpd）
-find package/ feeds/ -name "Makefile" | grep "vsftpd" | xargs sed -i 's/+vsftpd$/+vsftpd-alt/g'
-find package/ feeds/ -name "Makefile" | grep "vsftpd" | xargs sed -i 's/+vsftpd /+vsftpd-alt /g'
+# find package/ feeds/ -name "Makefile" | grep "vsftpd" | xargs sed -i 's/+vsftpd$/+vsftpd-alt/g'
+# find package/ feeds/ -name "Makefile" | grep "vsftpd" | xargs sed -i 's/+vsftpd /+vsftpd-alt /g'
 
 # 2. 在配置文件中禁用基础版 vsftpd，保留 vsftpd-alt
-sed -i 's/CONFIG_PACKAGE_vsftpd=y/# CONFIG_PACKAGE_vsftpd is not set/g' .config
-echo "# CONFIG_PACKAGE_vsftpd is not set" >> .config
-echo "CONFIG_PACKAGE_luci-app-vsftpd=y" >> .config
-echo "CONFIG_PACKAGE_vsftpd-alt=y" >> .config
+# sed -i 's/CONFIG_PACKAGE_vsftpd=y/# CONFIG_PACKAGE_vsftpd is not set/g' .config
+# echo "# CONFIG_PACKAGE_vsftpd is not set" >> .config
+# echo "CONFIG_PACKAGE_luci-app-vsftpd=y" >> .config
+# echo "CONFIG_PACKAGE_vsftpd-alt=y" >> .config
+
+rm -rf feeds/smpackage/*vsftpd*
