@@ -24,7 +24,7 @@ on:
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: 1e71a21
+  REPO_COMMIT: 1e71a219ca01c5e8706f1ce6a2305f8b5389211b
   FEEDS_CONF: feeds.conf.default.new
   CONFIG_FILE: 2026_1016.config
   DIY_P1_SH: diy-part1.sh
@@ -75,8 +75,10 @@ jobs:
     - name: 克隆源码
       working-directory: /workdir
       run: |
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+          git clone $REPO_URL openwrt
+          cd openwrt
+          git checkout $REPO_COMMIT
+          ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
 
     - name: 更新 & 安装 feeds & 执行脚本
